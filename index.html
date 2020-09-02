@@ -1,10 +1,19 @@
+
 <html>
 <body>
 	<div id='background'>
         <div id='character' style='position:absolute; top:100px; left:450px; background-image: url("img/down1.png"); width:59px; height:86px;'></div>
-    </div>
+	</div>
+	<div id = "dojo" style = 'position: absolute;
+	top: 0px;
+	right: 10;
+	width: 300px;
+	height:135px;
+	background-image: url("img/black_bg.jpg");
+	 background-size: 150px 100px;'>
+	</div>
     <script type="text/javascript">
-	    var leftValue = 450, topValue = 100; direction = 'down', step = 1;
+	    var leftValue = 450, topValue = 100; direction = 'down', step = 1, dojo = "";
 
     	function update(){
 			if(step == 1){
@@ -12,9 +21,12 @@
 			} else {
 				step = 1;
 			}
+			
+			
     		document.getElementById("character").style.left = leftValue+"px";
     		document.getElementById("character").style.top = topValue+"px";
 			document.getElementById("character").style.backgroundImage = "url('img/"+direction+step+".png')";
+			document.getElementById('dojo').style.backgroundImage = "url('img/"+dojo+"_bg.jpg')";
     	}
 
     	document.onkeydown = function(e){
@@ -22,18 +34,28 @@
     		if(e.keyCode == 37 && leftValue > 0) { // LEFT
     			leftValue = leftValue - 10;
 				direction = 'left';
+				
     		}
     		else if (e.keyCode == 39 && leftValue < 500) { // RIGHT
     			leftValue = leftValue + 10;   
-				direction = 'right'; 		
+				direction = 'right'; 	
+				
     		}
     		else if (e.keyCode == 40 && topValue <500) { // DOWN
 				topValue = topValue + 10;
 				direction = 'down';
+				
     		} 
 			else if (e.keyCode == 38 && topValue > 0 ) {
                     topValue = topValue - 10;
 					direction = 'top';
+					
+			}
+console.log(e);
+			if( e.keyCode == 40 || e.keyCode == 38 ){
+				dojo = "white";
+			} else {
+				dojo="black";
 			}
     		// ...
     		update();
